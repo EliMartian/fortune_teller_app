@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F7F45822BCB979000AD82BF /* Fortune_TellerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45812BCB979000AD82BF /* Fortune_TellerApp.swift */; };
-		6F7F45842BCB979000AD82BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45832BCB979000AD82BF /* ContentView.swift */; };
 		6F7F45862BCB979200AD82BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F45852BCB979200AD82BF /* Assets.xcassets */; };
 		6F7F45892BCB979200AD82BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F45882BCB979200AD82BF /* Preview Assets.xcassets */; };
 		6F7F45932BCB979200AD82BF /* Fortune_TellerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45922BCB979200AD82BF /* Fortune_TellerTests.swift */; };
 		6F7F459D2BCB979200AD82BF /* Fortune_TellerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F459C2BCB979200AD82BF /* Fortune_TellerUITests.swift */; };
 		6F7F459F2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F459E2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift */; };
+		6F7F45AC2BCB97E000AD82BF /* Fortune_TellerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */; };
+		6F7F45B32BCB97F800AD82BF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45AD2BCB97F700AD82BF /* HomeView.swift */; };
+		6F7F45B42BCB97F800AD82BF /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45AE2BCB97F700AD82BF /* NotificationsView.swift */; };
+		6F7F45B52BCB97F800AD82BF /* SecurityGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45AF2BCB97F700AD82BF /* SecurityGraphView.swift */; };
+		6F7F45B62BCB97F800AD82BF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45B02BCB97F700AD82BF /* ProfileView.swift */; };
+		6F7F45B72BCB97F800AD82BF /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45B12BCB97F700AD82BF /* PortfolioView.swift */; };
+		6F7F45B82BCB97F800AD82BF /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45B22BCB97F800AD82BF /* ResearchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +40,6 @@
 
 /* Begin PBXFileReference section */
 		6F7F457E2BCB979000AD82BF /* Fortune Teller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fortune Teller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F7F45812BCB979000AD82BF /* Fortune_TellerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fortune_TellerApp.swift; sourceTree = "<group>"; };
-		6F7F45832BCB979000AD82BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6F7F45852BCB979200AD82BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F7F45882BCB979200AD82BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F7F458E2BCB979200AD82BF /* Fortune TellerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fortune TellerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +47,13 @@
 		6F7F45982BCB979200AD82BF /* Fortune TellerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fortune TellerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7F459C2BCB979200AD82BF /* Fortune_TellerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fortune_TellerUITests.swift; sourceTree = "<group>"; };
 		6F7F459E2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fortune_TellerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fortune_TellerApp.swift; path = ../../fortune_teller_ios/Fortune_TellerApp.swift; sourceTree = "<group>"; };
+		6F7F45AD2BCB97F700AD82BF /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = ../../fortune_teller_ios/HomeView.swift; sourceTree = "<group>"; };
+		6F7F45AE2BCB97F700AD82BF /* NotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsView.swift; path = ../../fortune_teller_ios/NotificationsView.swift; sourceTree = "<group>"; };
+		6F7F45AF2BCB97F700AD82BF /* SecurityGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecurityGraphView.swift; path = ../../fortune_teller_ios/SecurityGraphView.swift; sourceTree = "<group>"; };
+		6F7F45B02BCB97F700AD82BF /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = ../../fortune_teller_ios/ProfileView.swift; sourceTree = "<group>"; };
+		6F7F45B12BCB97F700AD82BF /* PortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PortfolioView.swift; path = ../../fortune_teller_ios/PortfolioView.swift; sourceTree = "<group>"; };
+		6F7F45B22BCB97F800AD82BF /* ResearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResearchView.swift; path = ../../fortune_teller_ios/ResearchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +104,13 @@
 		6F7F45802BCB979000AD82BF /* Fortune Teller */ = {
 			isa = PBXGroup;
 			children = (
-				6F7F45812BCB979000AD82BF /* Fortune_TellerApp.swift */,
-				6F7F45832BCB979000AD82BF /* ContentView.swift */,
+				6F7F45AD2BCB97F700AD82BF /* HomeView.swift */,
+				6F7F45AE2BCB97F700AD82BF /* NotificationsView.swift */,
+				6F7F45B12BCB97F700AD82BF /* PortfolioView.swift */,
+				6F7F45B02BCB97F700AD82BF /* ProfileView.swift */,
+				6F7F45B22BCB97F800AD82BF /* ResearchView.swift */,
+				6F7F45AF2BCB97F700AD82BF /* SecurityGraphView.swift */,
+				6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */,
 				6F7F45852BCB979200AD82BF /* Assets.xcassets */,
 				6F7F45872BCB979200AD82BF /* Preview Content */,
 			);
@@ -257,8 +272,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F7F45842BCB979000AD82BF /* ContentView.swift in Sources */,
-				6F7F45822BCB979000AD82BF /* Fortune_TellerApp.swift in Sources */,
+				6F7F45B52BCB97F800AD82BF /* SecurityGraphView.swift in Sources */,
+				6F7F45B42BCB97F800AD82BF /* NotificationsView.swift in Sources */,
+				6F7F45B32BCB97F800AD82BF /* HomeView.swift in Sources */,
+				6F7F45B62BCB97F800AD82BF /* ProfileView.swift in Sources */,
+				6F7F45AC2BCB97E000AD82BF /* Fortune_TellerApp.swift in Sources */,
+				6F7F45B72BCB97F800AD82BF /* PortfolioView.swift in Sources */,
+				6F7F45B82BCB97F800AD82BF /* ResearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
