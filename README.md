@@ -66,8 +66,6 @@ more lookups, similar to how an API operates. Of course, free users will always 
 are prioritized, thus incentivizing them to switch to be paying customers and driving revenue. 
 
 # Initial Design
-The purpose of this section is to define the “Minimum Viable Product” (MVP). It may also be useful to
-call out the scope and expected/known limitations for your product here.
 
 An MVP for Fortune Teller is important to define, since its scope is quite vast. 
 A MVP for Fortune Teller would consist of the following elements: 
@@ -99,9 +97,6 @@ as to what subscription level they want to pay for, and the app should respond t
 because of this. 
 
 # Technical Architecture
-(What are the necessary components to support an MVP? Data structures? Storage considerations?
-Web/cloud interactions? Be sure to put in some thoughts as to how to measure your success here. Call
-out dependencies on 3rd party services/APIs here, too)
 
 The necessary components to ensure an MVP include an API, and also likely some sort of a database to store their 
 portfolios that they generate or receive from friends, although this would not be part of the MVP. The largest component of this 
@@ -120,5 +115,3 @@ on how we treat different customers (paying or non-paying), as well as figuring 
 portfolios will look like by exploring popular cloud service providers and other free alternatives. I do not have any additional questions at this time, 
 and I hope that by keeping the MVP manageable for this project it does not become too overwhelming this quarter, but rather gives me a solid 
 foundation to keep building off on in the coming months. Thank you for reading my proposal. 
-
-
