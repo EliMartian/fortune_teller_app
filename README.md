@@ -109,7 +109,9 @@ So some sort of rudimentary cryptography might be useful for this shared secret.
 Some technical challenges will likely be figuring out how to secretly communicate the shared API key, figuring out how to work with 
 Apple in-app purchases, throttling requests, working with using the Messages app and other apps to share information across devices, 
 figuring out how to condense some sort of a security or portfolio into a shareable format, figuring out how that information is going 
-to be stored, etc. To answer these questions (of which the majority are not part of the MVP), I will likely be looking into implementing 
+to be stored, etc. For the MVP considerations, like how to upload and receive basic file formats and take advantage of in-ecosystem things 
+like using the Messages app or sending notifications via the app on IOS, I plan to look into finding some good documentation on Apple's Swift 
+tutorials and also maybe look on YouTube. To answer the other questions (of which the majority are not part of the MVP), I will likely be looking into implementing 
 a basic cryptography approach (using someone else's instead of rolling my own crypto), looking into best practices for throttling requests based 
 on how we treat different customers (paying or non-paying), as well as figuring out what communicating and storing data like security ratings and 
 portfolios will look like by exploring popular cloud service providers and other free alternatives. I do not have any additional questions at this time, 
