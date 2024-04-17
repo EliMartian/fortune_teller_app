@@ -2,12 +2,12 @@
 The UI/UX included in the design submission screenshots appeal to the target audience of new investors by 
 providing a seamless and intuitive experience to be able to easily search and get information in a way that 
 is familiar to them and similar to something they understand (like the Apple Stocks app but with extra features). 
-Moreover, the design appeals to the audience that wants to share and build cool portfolios with their friends 
-as it offers a convenient and familiar experience to puttting together and customizing a portfolio, and then 
-offers the ability to share / load the new content in the user experince seemlessly. The UI/UX also enables
-more active investors who require greater resources by providing transparency in the in-app purchase tiers and 
-exactly what their money is going towards and how much value they are receiving as a result so they can guage 
-their purchase requirements accordingly. 
+Moreover, the design appeals to the audience that wants a social experience and to share and build cool portfolios with 
+their friends and family as it offers a convenient and familiar experience to puttting together and customizing a portfolio, 
+and then offers the ability to share / load the new content in the user experince seemlessly by including common functionality
+like AirDrop, Messages app, Email, etc. The UI/UX also enables more active investors who require greater resources by providing 
+transparency in the in-app purchase tiers and exactly what their money is going towards and how much value they are receiving 
+as a result so they can guage their purchase requirements accordingly. 
 
 # Project Name / Version
 Fortune Teller, Version 1
