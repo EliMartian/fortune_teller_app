@@ -5,18 +5,26 @@
 //  Created by E Martin on 4/6/24.
 //
 
+
 import Foundation
 import SwiftUI
 
 struct PortfolioView: View {
     var body: some View {
-        Text("Portfolio Screen")
-            .font(.title)
-            .navigationBarTitle("Portfolio")
-            .tabItem {
-                Image(systemName: "hourglass")
-                Text("Portfolio")
+        NavigationView {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Profile")
+                        .font(.title)
+                        .foregroundColor(.green)
+                    
+                    Spacer()
+                }
             }
+        }
+        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style to avoid
     }
 }
 

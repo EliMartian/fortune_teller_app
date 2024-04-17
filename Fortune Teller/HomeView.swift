@@ -11,33 +11,19 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Welcome to Fortune Teller")
-                    .font(.title)
-                    .padding()
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
                 
-                NavigationLink(destination: DetailView()) {
-                    Text("Go to Detail View")
-                        .foregroundColor(.blue)
-                        .padding()
+                VStack {
+                    Text("Welcome to Fortune Teller")
+                        .font(.title)
+                        .foregroundColor(.green)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
         }
-        .tabItem {
-            Image(systemName: "house.fill")
-            Text("Home")
-        }
-    }
-}
-
-struct DetailView: View {
-    var body: some View {
-        Text("This is the Detail View")
-            .font(.title)
-            .padding()
-            .navigationBarTitle("Detail")
+        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style to avoid
     }
 }
 

@@ -17,17 +17,24 @@ import SwiftUI
 
 struct NotificationsView: View {
     var body: some View {
-        Text("Notifications Screen")
-            .font(.title)
-            .navigationBarTitle("Research")
-            .tabItem {
-                Image(systemName: "bell")
-                Text("Notifications")
+        NavigationView {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Notifications")
+                        .font(.title)
+                        .foregroundColor(.green)
+                    
+                    Spacer()
+                }
             }
+        }
+        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style to avoid tab bar interference
     }
 }
 
-struct Notifications_Previews: PreviewProvider {
+struct NotificationsView_Previews: PreviewProvider {
     static var previews: some View {
         NotificationsView()
     }
