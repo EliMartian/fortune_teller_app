@@ -105,8 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				6F521BE72BCB9F2900B4D9B2 /* HomeView.swift */,
-				6F521BE42BCB9F2900B4D9B2 /* NotificationsView.swift */,
 				6F521BE52BCB9F2900B4D9B2 /* PortfolioView.swift */,
+				6F521BE42BCB9F2900B4D9B2 /* NotificationsView.swift */,
 				6F521BE92BCB9F2900B4D9B2 /* ProfileView.swift */,
 				6F521BE82BCB9F2900B4D9B2 /* ResearchView.swift */,
 				6F521BE62BCB9F2900B4D9B2 /* SecurityGraphView.swift */,
@@ -442,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fortune Teller/Preview Content\"";
+				DEVELOPMENT_TEAM = 46ZRQST3ZN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -454,7 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "FT.Fortune-Teller";
+				PRODUCT_BUNDLE_IDENTIFIER = "FT.Fortune-Teller-Martian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -470,6 +471,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Fortune Teller/Preview Content\"";
+				DEVELOPMENT_TEAM = 46ZRQST3ZN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -482,7 +484,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "FT.Fortune-Teller";
+				PRODUCT_BUNDLE_IDENTIFIER = "FT.Fortune-Teller-Martian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

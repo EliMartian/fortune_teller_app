@@ -10,13 +10,20 @@ import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text("Profile Screen")
-            .font(.title)
-            .navigationBarTitle("Profile")
-            .tabItem {
-                Image(systemName: "person.circle")
-                Text("Profile")
+        NavigationView {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    Text("Profile")
+                        .font(.title)
+                        .foregroundColor(.green)
+                    
+                    Spacer()
+                }
             }
+        }
+        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style to avoid
     }
 }
 

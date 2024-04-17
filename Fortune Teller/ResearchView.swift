@@ -18,39 +18,41 @@ struct ResearchView: View {
     // Swift working???
 
     var body: some View {
-        VStack {
-            TextField("Enter Stock Symbol", text: $ticker)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+        VStack(spacing: 0) {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing: 20) {
+                    TextField("Enter Stock Symbol", text: $ticker)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+
+                    Button("Search") {
+                        if !ticker.isEmpty {
+        //                    print("The stock the user put was: \(ticker)")
+                            doResearch()
+                        }
+                    }
+                }
                 .padding()
 
-            Button("Search") {
-                if !ticker.isEmpty {
-//                    print("The stock the user put was: \(ticker)")
-                    doResearch()
+                if !stockData.isEmpty {
+                    SecurityGraphView(stockData: stockData, ticker: ticker)
+                        .frame(height: 400)
+                        .padding()
+                        .clipped()
+
                 }
+
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+
+                Spacer()
             }
-            .padding()
-
-            if !stockData.isEmpty {
-                SecurityGraphView(stockData: stockData, ticker: ticker)
-                    .frame(height: 400)
-                    .padding()
-                    .clipped()
-
-            }
-
-            if !errorMessage.isEmpty {
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-            }
-
-            Spacer()
-        }
-        .navigationBarTitle("Research")
-        .tabItem {
-            Image(systemName: "magnifyingglass")
-            Text("Search")
+            
         }
     }
 
