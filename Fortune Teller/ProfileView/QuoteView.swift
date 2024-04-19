@@ -1,52 +1,66 @@
 //
-//  ProfileView.swift
+//  QuoteView.swift
 //  Fortune Teller
 //
-//  Created by E Martin on 4/6/24.
+//  Created by E Martin on 4/18/24.
 //
 
 import Foundation
 import SwiftUI
 import CoreData
 
-struct ProfileView: View {
+struct QuoteView: View {
     @ObservedObject var selectedAuthorsManager = SelectedAuthorsManager()
     @State private var authors: [String] = []
     @State private var displayedQuotes: [String: [String]] = [:]
 
     var body: some View {
-            NavigationView {
+        NavigationView {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
                 VStack {
-                    Text("Profile")
+                    Text("My Profile")
                         .font(.title)
                         .foregroundColor(.green)
                         .padding()
 
                     // Display toggle switches for each author
-                    ScrollView {
-                        ForEach(authors, id: \.self) { author in
-                            Toggle(isOn: Binding(
-                                get: { self.selectedAuthorsManager.selectedAuthors.contains(author) },
-                                set: { isSelected in
-                                    self.selectedAuthorsManager.toggleAuthorSelection(author)
+                    GeometryReader { geometry in
+                        ScrollView(.vertical, showsIndicators: false) {
+                            VStack(spacing: 12) {
+                                ForEach(authors, id: \.self) { author in
+                                    Toggle(isOn: Binding(
+                                        get: { self.selectedAuthorsManager.selectedAuthors.contains(author) },
+                                        set: { isSelected in
+                                            self.selectedAuthorsManager.toggleAuthorSelection(author)
+                                        }
+                                    )) {
+                                        Text(author)
+                                            .foregroundColor(Color("DarkGrey"))
+                                    }
+                                    .padding()
+                                    .background(Color("LightestGrey"))
+                                    .cornerRadius(8)
+                                    .fixedSize(horizontal: false, vertical: false) // Allow wrapping for long author names
+                                    .frame(maxWidth: .infinity)
                                 }
-                            )) {
-                                Text(author)
-                                    .foregroundColor(.white)
                             }
-                            .padding()
-                            .background(Color.gray)
-                            .cornerRadius(8)
                             .padding(.horizontal)
+                            .padding(.vertical, 40) // Adjust vertical padding
+                            .background(Color("LightGrey"))
+                            .cornerRadius(20) // Apply corner radius to the content container
+                            .frame(width: geometry.size.width * 0.9) // Limit width to 90% of available width
+                            .frame(height: calculateScrollViewHeight(authors: authors, maxHeight: geometry.size.height * 0.8)) // Adjust height based on number of authors and available space
                         }
                     }
-                    .padding(.top)
+                    .padding()
 
-                    Spacer()
+                    Spacer() // Pushes the button to the bottom
 
                     // Button to load and display selected quotes
                     Button(action: {
-                        loadAndDisplayQuotes()
+                        loadAuthorsAndQuotes()
                     }) {
                         Text("View Selected Quotes")
                             .font(.headline)
@@ -56,7 +70,7 @@ struct ProfileView: View {
                             .cornerRadius(8)
                     }
                     .padding()
-
+                    
                     // Display quotes under each author
                     List {
                         ForEach(displayedQuotes.sorted(by: { $0.key < $1.key }), id: \.key) { author, quotes in
@@ -68,14 +82,28 @@ struct ProfileView: View {
                             }
                         }
                     }
+                    .padding()
                 }
-                .padding()
                 .onAppear {
                     loadAuthorsFromPlist()
                 }
-                .navigationTitle("Authors")
             }
+            .padding()
+            .background(Color.black.edgesIgnoringSafeArea(.all)) // Full black background
         }
+
+        
+
+    }
+    
+    // Helper function to calculate the necessary height for the ScrollView
+    private func calculateScrollViewHeight(authors: [String], maxHeight: CGFloat) -> CGFloat {
+        let rowHeight: CGFloat = 60 // Adjust the row height as needed
+        let totalAuthorsHeight = CGFloat(authors.count) * rowHeight
+        let paddingHeight: CGFloat = 50 // Vertical padding around the ScrollView content
+        let containerHeight = totalAuthorsHeight + paddingHeight
+        return min(containerHeight, maxHeight) // Limit height to the available maximum height
+    }
 
     private func loadAuthorsFromPlist() {
         guard let loadedAuthors = DataLoader.loadQuotesFromPlist(named: "investor_quotes") else {
@@ -85,9 +113,9 @@ struct ProfileView: View {
         authors = Array(loadedAuthors.keys)
     }
 
-    private func loadAndDisplayQuotes() {
+    private func loadAuthorsAndQuotes() {
         let selectedAuthors = Array(selectedAuthorsManager.selectedAuthors)
-                
+        
         // Use DataLoader to load example quotes from plist
         DataLoader.loadExampleQuotes(for: selectedAuthors, in: PersistenceController.shared.container.viewContext)
 
@@ -122,12 +150,11 @@ struct ProfileView: View {
             print("Error fetching quotes: \(error.localizedDescription)")
         }
     }
-
 }
 
-struct ProfileView_Previews: PreviewProvider {
+
+struct QuoteView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        QuoteView()
     }
 }
-
