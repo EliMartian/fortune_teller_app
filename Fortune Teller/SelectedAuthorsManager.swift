@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 class SelectedAuthorsManager: ObservableObject {
     @Published var selectedAuthors: Set<String> = [] {
         didSet {
@@ -29,14 +30,19 @@ class SelectedAuthorsManager: ObservableObject {
     private func loadSelectedAuthors() {
         if let data = UserDefaults.standard.array(forKey: selectedAuthorsKey) as? [String] {
             selectedAuthors = Set(data)
+        } else {
+            // Handle case where no data is found or data is of unexpected type
+            print("Failed to load selected authors from UserDefaults.")
         }
     }
     
     func toggleAuthorSelection(_ author: String) {
-        if selectedAuthors.contains(author) {
-            selectedAuthors.remove(author)
-        } else {
-            selectedAuthors.insert(author)
+        DispatchQueue.main.async {
+            if self.selectedAuthors.contains(author) {
+                self.selectedAuthors.remove(author)
+            } else {
+                self.selectedAuthors.insert(author)
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ struct QuoteView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    Text("My Profile")
+                    Text("See Quotes From")
                         .font(.title)
                         .foregroundColor(.green)
                         .padding()
@@ -28,7 +28,7 @@ struct QuoteView: View {
                     // Display toggle switches for each author
                     GeometryReader { geometry in
                         ScrollView(.vertical, showsIndicators: false) {
-                            VStack(spacing: 12) {
+                            VStack(spacing: 10) {
                                 ForEach(authors, id: \.self) { author in
                                     Toggle(isOn: Binding(
                                         get: { self.selectedAuthorsManager.selectedAuthors.contains(author) },
@@ -110,8 +110,27 @@ struct QuoteView: View {
             print("Failed to load authors from plist.")
             return
         }
-        authors = Array(loadedAuthors.keys)
+        
+        // Get all authors from the loaded plist
+        let allAuthors = Array(loadedAuthors.keys)
+        
+        // Sort authors based on selected status and alphabetical order
+        authors = allAuthors.sorted { (author1, author2) -> Bool in
+            let isSelected1 = selectedAuthorsManager.selectedAuthors.contains(author1)
+            let isSelected2 = selectedAuthorsManager.selectedAuthors.contains(author2)
+            
+            // Check if authors are selected
+            if isSelected1 && !isSelected2 {
+                return true // author1 is selected, author2 is not selected (author1 comes first)
+            } else if !isSelected1 && isSelected2 {
+                return false // author2 is selected, author1 is not selected (author2 comes first)
+            } else {
+                // Both authors are either selected or not selected, sort alphabetically
+                return author1.localizedCaseInsensitiveCompare(author2) == .orderedAscending
+            }
+        }
     }
+
 
     private func loadAuthorsAndQuotes() {
         let selectedAuthors = Array(selectedAuthorsManager.selectedAuthors)

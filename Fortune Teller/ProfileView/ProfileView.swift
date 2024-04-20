@@ -10,88 +10,95 @@ import SwiftUI
 import CoreData
 
 struct ProfileView: View {
+    @State private var profileImage: UIImage? // State variable to hold the loaded profile image
+
     var body: some View {
-        NavigationLink(destination: QuoteView()) {
+        NavigationView {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
+                Text("Profile")
+                    .font(.title)
+                    .foregroundColor(.green)
+                
+                
                 
                 VStack {
-                    Text("Profile")
-                        .font(.title)
-                        .foregroundColor(.green)
+                    if let image = profileImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 64, height: 64) // Size of the profile image icon
+                            .clipShape(Circle())
+                            .padding(.top, 20) // Top padding for the profile image icon
+                    }
                     
-                    Spacer()
+                    VStack {
+                        Spacer()
+                        NavigationLink(destination: QuoteView()) {
+                            ProfileOptionRow(title: "Quotes")
+                        }
+                        .padding()
+                        .background(Color("LightestGrey"))
+
+                        NavigationLink(destination: ProfilePictureView()) {
+                            ProfileOptionRow(title: "Profile Picture")
+                        }
+                        .padding()
+                        .background(Color("LightestGrey"))
+
+                        Spacer()
+                    }
+//
                 }
-                
-                RoundedRectangle(cornerRadius: 16)
-                                    .foregroundColor(Color("LightGrey"))
-                                    .frame(height: 80) // Adjust height as needed
-                HStack {
-                    Text("Quotes")
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .padding()
 
-                    Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                        .padding()
+                .onAppear {
+                    loadProfileImage() // Load the profile image when the view appears
                 }
             }
         }
     }
-                
-//                RoundedRectangle(cornerRadius: 16)
-//                    .foregroundColor(Color("LightGrey"))
-//                    .frame(height: 80) // Adjust height as needed
-
-//                HStack {
-//                    Text("My Profile")
-//                        .font(.title)
-//                        .foregroundColor(.green)
-//                        .padding()
-//
-//                    Spacer()
-//
-//                    Image(systemName: "chevron.right")
-//                        .foregroundColor(.black)
-//                        .padding()
-//                }
-//            }
-//            .padding()
-//        }
-//        .navigationTitle("Profile")
-//        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style to avoid
-//    }
-//    var body: some View {
-//            NavigationLink(destination: QuoteView()) {
-//                ZStack {
-//                    Color.black.edgesIgnoringSafeArea(.all)
-//                    
-//                    RoundedRectangle(cornerRadius: 16)
-//                        .foregroundColor(Color("LightGrey"))
-//                        .frame(height: 80) // Adjust height as needed
-//
-//                    HStack {
-//                        Text("My Profile")
-//                            .font(.title)
-//                            .foregroundColor(.green)
-//                            .padding()
-//                        
-//                        Spacer()
-//                        
-//                        Image(systemName: "chevron.right")
-//                            .foregroundColor(.black)
-//                            .padding()
-//                    }
-//                }
-//                .padding()
-//            }
-//            .navigationTitle("Profile")
-//        }
+    
+    // Function to load the saved profile image
+    private func loadProfileImage() {
+        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return
+        }
+        
+        let fileURL = documentsDirectory.appendingPathComponent("selectedImage.jpg")
+        
+        do {
+            let imageData = try Data(contentsOf: fileURL)
+            self.profileImage = UIImage(data: imageData)
+        } catch {
+            print("Error loading profile image: \(error.localizedDescription)")
+        }
+    }
 }
 
+struct ProfileOptionRow: View {
+    var title: String
+
+    var body: some View {
+        ZStack {
+            HStack {
+                Text(title)
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding()
+
+                Spacer()
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.white)
+                    .padding()
+            }
+            .padding()
+        }
+        .frame(height: 80)
+        .background(Color("LightGrey"))
+        .cornerRadius(16)
+    }
+}
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
