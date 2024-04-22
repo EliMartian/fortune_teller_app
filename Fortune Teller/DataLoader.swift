@@ -74,6 +74,7 @@ class DataLoader {
         }
 
         do {
+            // Save in core data
             try context.save()
             print("Quotes loaded successfully!")
         } catch {
