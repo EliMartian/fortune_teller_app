@@ -141,6 +141,7 @@ class ProfilePictureViewModel: ObservableObject {
     }
     
     private func loadSelectedImage() {
+        // Use FileManager to save profile picture images
         guard let imageURL = imageURL,
               FileManager.default.fileExists(atPath: imageURL.path),
               let imageData = try? Data(contentsOf: imageURL),
