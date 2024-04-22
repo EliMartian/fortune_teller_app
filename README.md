@@ -1,3 +1,37 @@
+# Explanation of Storage Approaches on IOS Platform
+
+There are a bunch of different storage approaches on IOS, including: UserDefaults, FileManager, Core Data, and Cloud Storage just to name a few.
+UserDefaults are great for storing small pieces of info about user settings or preferences, but they have a very small storage space as I found
+out through implementation. Ideally, UserDefaults could be something pretty simple, such as DarkMode or LightMode being toggled on. I was intially
+trying to store several investor quotes in there. FileManager is great for managing things like user generated content such as images, documents, or 
+other data that could live in files. I found FileManager to be ideal for storing the user's preferred profile picture that they could updload
+to their profile page. FileManager is greate because it works for a lot of different sized files within the file system. Core Data is another 
+important way to store information on IOS, which I used for storing my investor quotes ultimately. Core Data is awesome because it focuses on 
+storing structured data and relationships (similar to a database) and can handle complex models and provides some handy data management features. 
+Another possible option is Cloud Storage, which could be nice to use if you want to offload storage to remote servers, which is important
+if you anticipate needing to scale your amount of user data and for better synchronization. Cloud Storage also reduces the local storage on the 
+user's phone naturally, which is also suitable for particularly vast volumes of data or users. 
+
+# Pros and Cons of each Approach for Fortune Teller
+
+UserDefaults: Pros include the lightweight ability to store information. However, at this time I don't have any user data that is simple
+and boolean in nature enough to be stored here (such as DarkMode for ex). Cons for my project would be that UserDefaults simply cannot handle
+the size of the data and types of data that I wanted to store for users. 
+
+FileManager: Pros for this option were great, I used FileManager to store the user's profile picture choice, which makes sense because it inherently
+deals with storing and loading user generated content that falls into a file-based format. I cannot think of a con for this option other than that
+for my project the data would have to naturally fall into an acceptable file format first, which luckily I did have a type. But it does not 
+make sense to exclusively use FileManager for all data, especially if your data has relationships. 
+
+Core Data: Pros for Core Data was that it supports relationships and works on structured data (like famous investor quotes), which was nice
+because it exhibits database like properties. Cons for my project was that it was a little hard to set up, so I had to look up a few resources
+to get Core Data working. Also the overhead required for it might not be beneficial in all circumstances, but I felt like it made sense to learn
+about how to set this up in my case. 
+
+Cloud Storage: Pros for Cloud Storage could be again that it is highly scalable and vastly reduces the amount of data that needs to be stored locally. 
+For my project though, the reason I didn't implement this was because it costs money to set up usually and also requires the need to utilize its scaling 
+services, on top of the development overhead. Thus, this was one con that made me not want to incorporate it yet into my project. 
+
 # Brief Description of how design is relevant to Target Audience
 The UI/UX included in the design submission screenshots appeal to the target audience of new investors by 
 providing a seamless and intuitive experience to be able to easily search and get information in a way that 
