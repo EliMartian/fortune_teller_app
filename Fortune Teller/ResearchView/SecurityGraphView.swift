@@ -46,7 +46,7 @@ struct SecurityGraphView: View {
             return AnyView(
                 VStack {
                     Text("Date: \(formattedDate(dataPoint.date))")
-                    Text("Adjusted Close: \(String(format: "%.2f", dataPoint.adjustedClose))")
+                    Text("Adjusted Close: $\(String(format: "%.2f", dataPoint.adjustedClose))")
                 }
                 .padding(10)
                 .background(Color.white)
