@@ -35,7 +35,7 @@ struct SecurityGraphView: View {
                     .opacity(isHovering ? 1.0 : 0.0) // Show/hide the overlay based on hover state
                     .animation(.easeInOut(duration: 0.2)) // Apply animation to the opacity change
                     .frame(width: geometry.size.width, height: 50, alignment: .top) // Set frame size and alignment
-                    .offset(y: -50) // Adjust vertical offset as needed
+                    .offset(y: -0.3 * geometry.size.width) // Adjust vertical offset as needed
             )
         }
     }
@@ -48,7 +48,7 @@ struct SecurityGraphView: View {
                     Text("Date: \(formattedDate(dataPoint.date))")
                     Text("Adjusted Close: $\(String(format: "%.2f", dataPoint.adjustedClose))")
                 }
-                .padding(10)
+                    .padding(10)
                 .background(Color.white)
                 .cornerRadius(5)
                 .shadow(radius: 5)
