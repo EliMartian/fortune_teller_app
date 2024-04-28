@@ -81,4 +81,5 @@ class DataLoader {
             print("Error saving quotes: \(error.localizedDescription)")
         }
     }
+    
 }
