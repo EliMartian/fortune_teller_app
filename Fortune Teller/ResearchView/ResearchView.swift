@@ -78,7 +78,7 @@ struct ResearchView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height * 0.90)
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all)) // Apply background color to outer VStack
+        .background(Color.black.edgesIgnoringSafeArea(.all)) // Apply black color
     }
     
     private func calculateGraphHeight(geometry: GeometryProxy) -> CGFloat {
