@@ -12,6 +12,7 @@ import CoreData
 struct ProfileView: View {
     @State private var profileImage: UIImage? // State variable to hold the loaded profile image
     @EnvironmentObject private var shopKitManager: ShopKitManager
+    @State private var isShowingShopView = false // State to control presentation of ShopView
 
     var body: some View {
         NavigationView {
@@ -37,12 +38,18 @@ struct ProfileView: View {
 
                             Spacer()
 
-                            NavigationLink(destination: ShopView()) {
+                            Button(action: {
+                                isShowingShopView = true // Set state to present ShopView
+                            }) {
                                 Image(systemName: "cart")
                                     .foregroundColor(.green)
                                     .font(.system(size: 36)) // Increase the font size to make the icon larger
                                     .frame(width: 64, height: 64)
                                     .padding(.trailing, 20)
+                            }
+                            .sheet(isPresented: $isShowingShopView) {
+                                ShopView()
+                                    .environmentObject(shopKitManager)
                             }
                         }
                         .background(Color.black.edgesIgnoringSafeArea(.all))
