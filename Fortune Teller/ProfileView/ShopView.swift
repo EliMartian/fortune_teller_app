@@ -4,31 +4,53 @@
 //
 //  Created by E Martin on 4/28/24.
 //
-
 import SwiftUI
-import StoreKit
+import Combine
 
 struct ShopView: View {
     @EnvironmentObject private var shopKitManager: ShopKitManager
+    @State private var isNavigatingBack = false // State to control navigation back
     
     var body: some View {
-        List {
-            ForEach(Array(shopKitManager.products.enumerated()), id: \.element) { index, product in
-                Button(action: {
-                    shopKitManager.purchaseProduct(product)
-                }) {
-                    Text("\(product.localizedTitle) - \(formatPrice(product.price, locale: product.priceLocale))")
+        VStack {
+            Text("Shop")
+                .font(.title)
+                .foregroundColor(.green)
+                .padding() // Add padding for visual separation
+            
+            if !shopKitManager.fakeProducts.isEmpty {
+                List(shopKitManager.fakeProducts) { product in
+                    Text(product.localizedTitle)
+                    Text(String(describing: product.price))
+                        .foregroundColor(.green)
                 }
-                .id(index) // Ensure each button has a unique identifier
+            } else {
+                ProgressView("Loading...") // Show loading indicator while fakeProducts is empty
             }
         }
-    }
-    
-    // Helper function to format SKProduct price
-    private func formatPrice(_ price: NSDecimalNumber, locale: Locale) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = locale
-        return formatter.string(from: price) ?? ""
+        .navigationBarTitle("In-App Purchases")
+        .navigationBarBackButtonHidden(true) // Hide default back button
+        
+        // Custom back button leading navigation link
+        .navigationBarItems(leading:
+            Button(action: {
+                isNavigatingBack = true // Set state to trigger navigation back
+            }) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.green)
+                    .imageScale(.large)
+            }
+        )
+        .background(
+            NavigationLink(
+                destination: ProfileView(),
+                isActive: $isNavigatingBack,
+                label: {
+                    EmptyView() // Use a NavigationLink to navigate back to ProfileView
+                }
+            )
+            .hidden() // Hide the NavigationLink view
+        )
     }
 }
+
