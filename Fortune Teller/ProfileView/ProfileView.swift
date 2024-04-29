@@ -11,6 +11,7 @@ import CoreData
 
 struct ProfileView: View {
     @State private var profileImage: UIImage? // State variable to hold the loaded profile image
+    @EnvironmentObject private var shopKitManager: ShopKitManager
 
     var body: some View {
         NavigationView {
@@ -23,14 +24,35 @@ struct ProfileView: View {
                 
                 
                 VStack {
-                    if let image = profileImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 64, height: 64) // Size of the profile image icon
-                            .clipShape(Circle())
-                            .padding(.top, 20) // Top padding for the profile image icon
+                    GeometryReader { geometry in
+                        HStack {
+                            if let image = profileImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 64, height: 64)
+                                    .clipShape(Circle())
+                                    .padding(.top, 20)
+                            }
+
+                            Spacer()
+
+                            NavigationLink(destination: ShopView()) {
+                                Image(systemName: "cart")
+                                    .foregroundColor(.green)
+                                    .font(.system(size: 36)) // Increase the font size to make the icon larger
+                                    .frame(width: 64, height: 64)
+                                    .padding(.trailing, 20)
+                            }
+                        }
+                        .background(Color.black.edgesIgnoringSafeArea(.all))
+
+//                        .background(Color.black.edgesIgnoringSafeArea(.all)) // Apply black color
+//                        .frame(width: geometry.size.width, height: geometry.size.height * 0.20)
+
                     }
+                    
+                    Spacer()
                     
                     VStack {
                         Spacer()
