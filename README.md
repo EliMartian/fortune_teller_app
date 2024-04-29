@@ -1,3 +1,55 @@
+# List of Features required for MVP + breaking down Deliverables 
+
+Feature 1: Security Search feature, where the user enters a ticker symbol, gets back 
+some information about the performance of the security over different time periods. 
+
+Deliverables 1: For this first feature, the deliverables required left to finish are the following: 
+* Build in graph ranges so the user can choose between different time period (ie graph of 5 years, 10 years, etc).
+* I would also like to add a scaler so the user can drag how much they want to invest and then get customized numbers based on however much they invested.
+* Build in a few second delay when the user searches up a stock, where it shows them one of the quotes that they have selected (loading screen basically)
+
+Feature 2: User Portfolio create feature, where the user can build a portfolio with a name and share with others
+
+Deliverables 2: For the second feature, the deliverables required left to finish are the following:
+* Add more than just the current name, security list (of tickers) that defines a Portfolio. Would like to add at least one
+of the following: a cost basis, or potentially a quantity for each share, date purchased, etc.
+* The ability to edit a portfolio (and have it save / update some part of the Portfolio's information)
+* Show a toast when the user adds, deletes, or edits a Portfolio on the main page
+
+Feature 3: User Portfolio upload / receive feature, where the user can upload a Portfolio that others send them
+
+Deliverables 3: For the third feature, the deliverables required left to finish are the following: 
+* Actually parse the string correctly that the user enters, and not just copy the last created portfolio (this is what is currently happening)
+
+Feature 4: User Shop feature and associated number of requests
+
+Deliverables 4: For the fourth feature, the deliverables required left to finish are the following:
+* Have "fake" options that the user can select from in the shop (does not have to actually purchase from the IOS app store), but when they click on one of these,
+it should update their number of requests (of stock lookups) and display that back to them in the Profile page. 
+
+# Mapping between value and feature for MVP (Justification) 
+
+Feature 1 Mapping: Feature 1 allows the user to customize their investment both through cost basis (how much money they put into the stock)
+and also the time (see how much the stock returns over different amounts of time). This feature is imperative to the value of Fortune Teller, 
+as it's all about customer experience and customization to their personal situation. They should be able to enter different scenarios that might 
+reflect their financial experience, and see how the investment would do given a certain amount of time or money. This freedom and customizability
+offered by Feature 1 is core to the overall experience I am hoping to cultivate. 
+
+Feature 2 Mapping: Feature 2 allows the user to create and put together a portfolio of stocks to keep track of. It can be difficult to mentally keep 
+track of all the stocks you might want to put together, and so since Fortune Teller is intended to be a collaborative app, the goal is ultimately for 
+people to be able to share these hypothetical portfolios between each other, so they could see how they perform over time. Thus, in order to share 
+between users and promote collaboration and shared knowledge of security (core value of Fortune Teller), we need to allow the users to first build a portfolio 
+that is customizable. 
+
+Feature 3 Mapping: Feature 3 allows the user to upload a portfolio that they might receive from a friend or family, and then add that to their own list 
+of portfolios. This is important because again due to the value of collaboration and sharing investment advice and knowledge that is one of the core principles of 
+Fortune Teller, the user also needs a convenient and easy way to upload their portfolio that they receive from others, and Feature 3 delivers that for them. 
+
+Feature 4 Mapping: Feature 4 allows the user to be able to choose a amount of stock lookups per minute that works for them, which is part of Fortune Teller's
+core principle of allowing customer customizability, and allowing users to only pay for what they need. That being said, Fortune Teller also anticipates
+the need to be scalable and have a way to limit and rate customers, which is why having the customer limit and ability to pay for additional
+lookups is essential to the value of customizability, and providing additional value in terms of usability for the customers using the app. 
+
 # Explanation of Storage Approaches on IOS Platform
 
 There are a bunch of different storage approaches on IOS, including: UserDefaults, FileManager, Core Data, and Cloud Storage just to name a few.
