@@ -1,14 +1,15 @@
 # List of Features required for MVP + breaking down Deliverables 
 
-Feature 1: Security Search feature, where the user enters a ticker symbol, gets back 
-some information about the performance of the security over different time periods. 
+## Feature 1: Security Search feature
+Description: Where the user enters a ticker symbol, gets back some information about the performance of the security over different time periods. 
 
 Deliverables 1: For this first feature, the deliverables required left to finish are the following: 
 * Build in graph ranges so the user can choose between different time period (ie graph of 5 years, 10 years, etc).
 * I would also like to add a scaler so the user can drag how much they want to invest and then get customized numbers based on however much they invested.
 * Build in a few second delay when the user searches up a stock, where it shows them one of the quotes that they have selected (loading screen basically)
 
-Feature 2: User Portfolio create feature, where the user can build a portfolio with a name and share with others
+## Feature 2: User Portfolio create feature
+Description: Where the user can build a portfolio with a name and share with others
 
 Deliverables 2: For the second feature, the deliverables required left to finish are the following:
 * Add more than just the current name, security list (of tickers) that defines a Portfolio. Would like to add at least one
@@ -16,12 +17,13 @@ of the following: a cost basis, or potentially a quantity for each share, date p
 * The ability to edit a portfolio (and have it save / update some part of the Portfolio's information)
 * Show a toast when the user adds, deletes, or edits a Portfolio on the main page
 
-Feature 3: User Portfolio upload / receive feature, where the user can upload a Portfolio that others send them
+## Feature 3: User Portfolio upload / receive feature
+Description: Where the user can upload a Portfolio that others send them
 
 Deliverables 3: For the third feature, the deliverables required left to finish are the following: 
 * Actually parse the string correctly that the user enters, and not just copy the last created portfolio (this is what is currently happening)
 
-Feature 4: User Shop feature and associated number of requests
+## Feature 4: User Shop feature and associated number of requests
 
 Deliverables 4: For the fourth feature, the deliverables required left to finish are the following:
 * Have "fake" options that the user can select from in the shop (does not have to actually purchase from the IOS app store), but when they click on one of these,
