@@ -1,3 +1,33 @@
+# Various States that an app can enter on IOS
+The various states that an app can enter on IOS include: not running, suspended, inactive, active, and background.
+For not running, this could be like when the user recently exited out of the app and now the app is no longer running
+until the user launches the app again. Suspended is when the user might switch to another app or leave the app, but 
+they have not exited out of the app so it remains in a suspended state until the user comes back to the app. Inactive
+state could be like when the user gets an incoming phone call, the app is still in the foreground but is temporarily 
+inactive due to some sort of an incoming event. Active is when the user is directly engaging with the app, and there
+are no incoming events and the user is actively doing things within the app. Background state is when the app
+is still doing something in the background / running code (could be like playing music after the device is locked, or 
+maybe checking your location, etc) and thus is not currently being used, but is doing something in the background
+that affects the user potentially next time they log in. 
+
+# Various States that you need to consider for your app, why, and what happens
+For my app, I need to consider not running, suspended, inactive, and active states. I want to consider the 
+not running state, because I want it to be that when the user inevitably swipes out of my app and locks their phone, that
+their user data is saved when the app enters the not running state, so that next time they launch the app the info is still
+there which is core to their experience. To accomplish this, I store a lot of the user data using File Manager on IOS
+so that all of their important larger file info is saved when the app is not running. I also consider the suspended state 
+because if the user is typing in a stock for a portfolio say, and they need to go to another app to look something up about
+the stock maybe, when they come back they expect that their portfolio info they were typing in is still there (otherwise they
+would have to start over which is frustrating). Thus, I accomplish handling this by using things like Swift Form and TextField entities 
+in conjunction with state management techniques like @State, @Binding and ObservableObject to help better keep track
+of the user's currently entered info in the text box when they navigate tasks and the app goes into the suspended state.
+The inactive state is equally important to consider, as if the user gets a phone call they should also not lose all of their data. By using 
+the above methods, I also handle this state as well. Lastly, then the app becomes active, I want to display certain things to the user, 
+like their chosen profile picture, load in the quotes from authors they chose, etc. This is handled in the entry point to my app @main
+in Swift where I have an .onAppear() function which basically handles when the app launches, what should appear to the users. This 
+info is important because it is customizable to the user making their experience with my app more personable, customizable, and stress free 
+ideally since their information is preserved and saved throughout the app going into different states. 
+
 # List of Features required for MVP + breaking down Deliverables 
 
 ## Feature 1: Security Search feature
