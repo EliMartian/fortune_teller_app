@@ -216,20 +216,17 @@ struct YieldView: View {
                 return Text("Calculated Yield on YTD: $\(yield, specifier: "%.2f")")
                     .foregroundColor(.black)
                     .padding()
-                    .eraseToAnyView()
             } else {
                 // Display yield for specified years
                 return Text("Calculated Yield on \(calculation.years) Years: $\(yield, specifier: "%.2f")")
                     .foregroundColor(.black)
                     .padding()
-                    .eraseToAnyView()
             }
         } else {
             // Display failure message for the specified years
             return Text("Failed to calculate yield for \(calculation.years == 0 ? "YTD" : "\(calculation.years) Years")")
                 .foregroundColor(.red)
                 .padding()
-                .eraseToAnyView()
         }
     }
 }

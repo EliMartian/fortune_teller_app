@@ -8,10 +8,12 @@
 import Foundation
 import SwiftUI
 
-
 struct SecurityGraphView: View {
     var stockData: [StockDataPoint]
     var ticker: String // Ticker symbol
+
+    @State private var selectedOptionIndex = 0 // Index for selected option (e.g., 0 for 10 years, 1 for 5 years)
+    private let optionRanges = [120, 60, 36, 24, 12, 6, 3, 1, 0.25] // Number of months for each option (e.g., 10 years = 120 months)
 
     @State private var isHovering = false
     @State private var hoveredDataPoint: StockDataPoint?
@@ -22,33 +24,101 @@ struct SecurityGraphView: View {
                 Text(ticker.uppercased()) // Display ticker symbol as title in all caps
 
                 if !stockData.isEmpty {
-                    GraphContent(stockData: stockData, geometry: geometry, isHovering: $isHovering, hoveredDataPoint: $hoveredDataPoint)
+                    GraphContent(stockData: filteredStockData(), geometry: geometry, isHovering: $isHovering, hoveredDataPoint: $hoveredDataPoint)
                         .padding(.bottom, 50) // Add bottom padding to make space for the overlay
                 } else {
                     Text("No security data available")
                         .foregroundColor(.gray)
                         .padding()
                 }
+
+                Picker(selection: $selectedOptionIndex, label: Text("Select Option")) {
+                    Text("10Y").tag(0)
+                    Text("5Y").tag(1)
+                    Text("3Y").tag(2)
+                    Text("2Y").tag(3)
+                    Text("1Y").tag(4)
+                    Text("6M").tag(5)
+                    Text("3M").tag(6)
+                    Text("1M").tag(7)
+                    Text("1W").tag(8)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
             }
             .overlay(
                 hoveredDataView(geometry: geometry) // Pass geometry to the overlay
                     .opacity(isHovering ? 1.0 : 0.0) // Show/hide the overlay based on hover state
                     .animation(.easeInOut(duration: 0.2)) // Apply animation to the opacity change
                     .frame(width: geometry.size.width, height: 50, alignment: .top) // Set frame size and alignment
-                    .offset(y: -0.3 * geometry.size.width) // Adjust vertical offset as needed
+                    .offset(y: -0.45 * geometry.size.width) // Adjust vertical offset as needed
             )
         }
     }
-
     
+    private func filteredStockData() -> [StockDataPoint] {
+            guard selectedOptionIndex < optionRanges.count else {
+                return stockData
+            }
+
+            let maxMonths = optionRanges[selectedOptionIndex]
+            let currentDate = Date()
+            var startDate: Date?
+            
+            if (maxMonths >= 1 && maxMonths <= 120) {
+                // Calculate the start date by subtracting maxMonths from the current date
+                startDate = Calendar.current.date(byAdding: .month, value: -Int(maxMonths), to: currentDate)
+            } else if (maxMonths == 0.25) {
+                startDate = Calendar.current.date(byAdding: .day, value: -Int(7), to: currentDate)
+            } else {
+                // Handle invalid maxMonths value (out of range)
+                print("Error: Invalid value for maxMonths.")
+                return []
+            }
+        
+            guard let validStartDate = startDate else {
+                    print("Error: Failed to calculate start date.")
+                    return []
+            }
+            
+
+            // Get the year, month, and day components of the start date
+            let startComponents = Calendar.current.dateComponents([.year, .month, .day], from: validStartDate)
+            guard let startYear = startComponents.year,
+                  let startMonth = startComponents.month,
+                  let startDay = startComponents.day else {
+                print("Error: Failed to extract start date components.")
+                return []
+            }
+
+            // Find the start index using SecurityRatingView.findEntry
+            let startIndex = SecurityRatingView.findEntry(year: startYear, month: startMonth, day: startDay, response: stockData)
+            guard let validStartIndex = startIndex else {
+                print("Error: Start index not found.")
+                return []
+            }
+
+            // Filter stockData based on the start index
+            let filteredStockData = Array(stockData[validStartIndex..<stockData.count])
+            print("filteredStockData")
+            print(filteredStockData)
+
+            return filteredStockData
+        }
+
+
+
+
     private func hoveredDataView(geometry: GeometryProxy) -> some View {
         if let dataPoint = hoveredDataPoint {
+            let formattedDateString = formattedDate(dataPoint.date) // Use formattedDate directly
+
             return AnyView(
                 VStack {
-                    Text("Date: \(formattedDate(dataPoint.date))")
+                    Text("Date: \(formattedDateString)")
                     Text("Adjusted Close: $\(String(format: "%.2f", dataPoint.adjustedClose))")
                 }
-                    .padding(10)
+                .padding(10)
                 .background(Color.white)
                 .cornerRadius(5)
                 .shadow(radius: 5)
@@ -58,12 +128,21 @@ struct SecurityGraphView: View {
         }
     }
 
-
     private func formattedDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
         return formatter.string(from: date)
     }
+    
+    private func extractDateComponents(_ date: Date) -> [Int] {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+
+        return [Int(year), Int(month), Int(day)]
+    }
+
 }
 
 struct GraphContent: View {
@@ -76,14 +155,6 @@ struct GraphContent: View {
         ZStack(alignment: .topLeading) {
             graphPath
             dataPointCircles
-//            if let contentView = makeHoveredDataView() {
-//                contentView
-//                    .position(
-//                        x: min(geometry.size.width - 20, CGFloat(stockData.firstIndex { $0.date == hoveredDataPoint?.date && $0.adjustedClose == hoveredDataPoint?.adjustedClose } ?? 0) * geometry.size.width / CGFloat(stockData.count - 1)),
-//                        y: normalizedY(for: hoveredDataPoint?.adjustedClose ?? 0, in: geometry) - 50
-//                    )
-//
-//            }
         }
         .frame(height: 200)
         .padding()
@@ -106,73 +177,33 @@ struct GraphContent: View {
     }
 
     private var dataPointCircles: some View {
-        ForEach(stockData.indices) { index in
-            let dataPoint = stockData[index]
-            let x = CGFloat(index) / CGFloat(stockData.count - 1) * (geometry.size.width - 20)
-            let y = normalizedY(for: dataPoint.adjustedClose, in: geometry)
+        ForEach(stockData.indices, id: \.self) { index in
+            if index < stockData.count {
+                let dataPoint = stockData[index]
+                let x = CGFloat(index) / CGFloat(stockData.count - 1) * (geometry.size.width - 20)
+                let y = normalizedY(for: dataPoint.adjustedClose, in: geometry)
 
-            Circle()
-                .fill(Color.green)
-                .frame(width: 8, height: 8)
-                .position(x: x, y: y)
-                .gesture(
-                    TapGesture()
-                        .onEnded { _ in
-                            hoveredDataPoint = dataPoint
-                            isHovering = true
-                        }
-                )
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 8, height: 8)
+                    .position(x: x, y: y)
+                    .gesture(
+                        TapGesture()
+                            .onEnded { _ in
+                                hoveredDataPoint = dataPoint
+                                isHovering = true
+                            }
+                    )
+            }
         }
     }
 
     private func normalizedY(for value: Double, in geometry: GeometryProxy) -> CGFloat {
-        guard !stockData.isEmpty else { return 0 }
-
-        let minValue = stockData.map { $0.adjustedClose }.min() ?? 0
-        let maxValue = stockData.map { $0.adjustedClose }.max() ?? 100
-
-        // Calculate the normalized value in the range [0, 1]
-        let normalizedValue = (value - minValue) / (maxValue - minValue)
-
-        // Scale the normalized value to fit within the available height (consider padding)
+        guard let maxValue = stockData.map({ $0.adjustedClose }).max() else {
+            return 0
+        }
         let padding: CGFloat = 50 // Adjust padding as needed
-        let scaledValue = normalizedValue * (geometry.size.height - 2 * padding)
-
-        // Calculate the y-position by inverting the scaled value
-        let yPosition = geometry.size.height - scaledValue - padding
-
-        return yPosition
-    }
-
-
-
-
-//    private func makeHoveredDataView() -> AnyView? {
-//        guard isHovering, let dataPoint = hoveredDataPoint else {
-//            return nil
-//        }
-//
-//        let contentView = VStack {
-//            Text("Date: \(formattedDate(dataPoint.date))")
-//            Text("Adjusted Close: \(String(format: "%.2f", dataPoint.adjustedClose))")
-//        }
-//        .padding(10)
-//        .background(Color.white)
-//        .cornerRadius(5)
-//
-//        return AnyView(contentView)
-//    }
-//
-//    private func formattedDate(_ date: Date) -> String {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .short
-//        return formatter.string(from: date)
-//    }
-}
-
-
-extension View {
-    func eraseToAnyView() -> AnyView {
-        return AnyView(self)
+        let scaledValue = CGFloat(value / maxValue) * (geometry.size.height - 2 * padding)
+        return geometry.size.height - scaledValue - padding
     }
 }
