@@ -32,70 +32,27 @@ struct SecurityGraphView: View {
                         .padding()
                 }
 
-                Picker(selection: $selectedOptionIndex, label: Text("")) {
+                Picker(selection: $selectedOptionIndex, label: Text("Select Option")) {
                     Text("10Y").tag(0)
-                        .foregroundColor(selectedOptionIndex == 0 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 0 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("5Y").tag(1)
-                        .foregroundColor(selectedOptionIndex == 1 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 1 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("3Y").tag(2)
-                        .foregroundColor(selectedOptionIndex == 2 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 2 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("2Y").tag(3)
-                        .foregroundColor(selectedOptionIndex == 3 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 3 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("1Y").tag(4)
-                        .foregroundColor(selectedOptionIndex == 4 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 4 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("6M").tag(5)
-                        .foregroundColor(selectedOptionIndex == 5 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 5 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("3M").tag(6)
-                        .foregroundColor(selectedOptionIndex == 6 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 6 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("1M").tag(7)
-                        .foregroundColor(selectedOptionIndex == 7 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 7 ? Color.gray : Color.black)
-                        .cornerRadius(8)
-
                     Text("1W").tag(8)
-                        .foregroundColor(selectedOptionIndex == 8 ? .white : .black)
-                        .padding()
-                        .background(selectedOptionIndex == 8 ? Color.gray : Color.black)
-                        .cornerRadius(8)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                .padding(.bottom, 50)
             }
             .overlay(
                 hoveredDataView(geometry: geometry) // Pass geometry to the overlay
                     .opacity(isHovering ? 1.0 : 0.0) // Show/hide the overlay based on hover state
                     .animation(.easeInOut(duration: 0.2)) // Apply animation to the opacity change
                     .frame(width: geometry.size.width, height: 50, alignment: .top) // Set frame size and alignment
-                    .offset(y: -0.45 * geometry.size.width) // Adjust vertical offset as needed
+                    .offset(y: -0.35 * geometry.size.width) // Adjust vertical offset as needed
             )
         }
     }

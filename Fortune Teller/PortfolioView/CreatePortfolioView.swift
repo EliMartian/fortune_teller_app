@@ -14,6 +14,8 @@ struct CreatePortfolioView: View {
 
     @State private var portfolioName: String = ""
     @State private var tickerSymbols: [String] = [""]
+    @State private var showCostBasis = false // State variable to control visibility of Cost Basis textbox
+
 
     var body: some View {
         NavigationView {
@@ -22,9 +24,28 @@ struct CreatePortfolioView: View {
                     TextField("Portfolio Name", text: $portfolioName)
 
                     ForEach(tickerSymbols.indices, id: \.self) { index in
-                        TextField("Ticker Symbol \(index + 1)", text: $tickerSymbols[index])
+                        VStack(alignment: .leading) {
+                            HStack {
+                                TextField("Ticker Symbol \(index + 1)", text: $tickerSymbols[index])
+                                    .padding() // Add padding to the text field for spacing
+                                
+                                Image(systemName: "dollarsign.circle.fill")
+                                    .foregroundColor(.green)
+                                    .padding(.trailing, 8) // Adjust trailing padding to separate the icon from the text field
+                                    .onTapGesture {
+                                        // Toggle the state to show/hide the cost basis textbox
+                                        showCostBasis.toggle()
+                                    }
+                            }
+                            .padding(.horizontal) // Add horizontal padding to the HStack
+                            
+                            if showCostBasis {
+                                TextField("Cost Basis", text: .constant(""))
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.leading, 40) // Add leading padding to indent the cost basis textbox
+                            }
+                        }
                     }
-
                     Button(action: {
                         tickerSymbols.append("")
                     }) {
