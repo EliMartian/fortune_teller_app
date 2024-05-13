@@ -19,81 +19,81 @@ struct ResearchView: View {
     @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                VStack {
-                    ZStack {
-                        Color.black.edgesIgnoringSafeArea(.all)
-                        
-                        VStack(spacing: 20) {
-                            TextField("Enter Stock Symbol", text: $ticker)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .padding()
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack {
+                        ZStack {
+                            Color.black.edgesIgnoringSafeArea(.all)
                             
-                            Button("Search") {
-                                if !ticker.isEmpty {
-                                    doResearch()
-                                    showSlider = true // Show slider after search
-                                }
-                            }
-                            Spacer()
-                        }
-                        .padding()
-                        
-                        if !stockData.isEmpty {
-                            SecurityGraphView(stockData: stockData, ticker: ticker)
-                                .frame(height: self.calculateGraphHeight(geometry: geometry))
-                                .padding(.top, self.calculateVerticalPaddingTop(geometry: geometry))
-                                .padding(.bottom, self.calculateVerticalPaddingBottom(geometry: geometry))
-                                .clipped()
-                        }
-                        
-                        if showSlider {
-                            VStack {
-                                Text("Investment Amount: $\(Int(investmentAmount))")
-                                    .foregroundColor(.white)
-                                    .padding(.bottom, 10) // Add bottom padding to separate from the Slider
+                            VStack(spacing: 10) {
+                                TextField("Enter Stock Symbol", text: $ticker)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding()
                                 
-                                Slider(value: $investmentAmount, in: 1000...100000, step: 1000)
-                                    .padding(.horizontal)
-                                    .accentColor(.green)
+                                Button("Search") {
+                                    if !ticker.isEmpty {
+                                        doResearch()
+                                        showSlider = true // Show slider after search
+                                    }
+                                }
+                                Spacer()
                             }
-                            .padding(.top, self.calculatePercentageHeight(geometry: geometry, percentage: 0.65)) // Adjust the top padding
+                            .padding()
+                            
+                            if !stockData.isEmpty {
+                                SecurityGraphView(stockData: stockData, ticker: ticker)
+                                    .frame(height: self.calculateGraphHeight(geometry: geometry))
+                                    .padding(.top, self.calculateVerticalPaddingTop(geometry: geometry))
+                                    .padding(.bottom, self.calculateVerticalPaddingBottom(geometry: geometry))
+                                    
+                                
+                                
+                                VStack {
+                                    Text("Investment Amount: $\(Int(investmentAmount))")
+                                        .foregroundColor(.white)
+                                        .padding(.top, 10) // Add bottom padding to separate from the Slider
+                                    
+                                    Slider(value: $investmentAmount, in: 1000...100000, step: 1000)
+                                        .padding(.horizontal)
+                                        .accentColor(.green)
+                                }
+                                .padding(.top, self.calculatePercentageHeight(geometry: geometry, percentage: 0.70)) // Adjust the top padding
+                            }
                         }
-                    }
-                    
-                    // Display yield calculations
-                    ForEach(yieldCalculations) { calculation in
-                        if let yield = calculation.yield {
-                            YieldView(calculation: calculation, investmentAmount: investmentAmount)
+                        
+                        // Display yield calculations
+                        ForEach(yieldCalculations) { calculation in
+                            if let yield = calculation.yield {
+                                YieldView(calculation: calculation, investmentAmount: investmentAmount)
+                            }
                         }
+                        .padding(10)
+                        .background(Color.white)
+                        .cornerRadius(5)
+                        
+                        Spacer() // Add Spacer to push content to the top
                     }
-                    .background(Color.white)
-                    .cornerRadius(5)
-                    
-                    Spacer() // Add Spacer to push content to the top
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height * 0.90)
             }
-            .frame(width: geometry.size.width, height: geometry.size.height * 0.90)
+            .background(Color.black.edgesIgnoringSafeArea(.all))
         }
-        .background(Color.black.edgesIgnoringSafeArea(.all))
-    }
-    
-    private func calculatePercentageHeight(geometry: GeometryProxy, percentage: CGFloat) -> CGFloat {
-        return geometry.size.height * percentage
-    }
+        
+        private func calculatePercentageHeight(geometry: GeometryProxy, percentage: CGFloat) -> CGFloat {
+            return geometry.size.height * percentage
+        }
 
-    private func calculateGraphHeight(geometry: GeometryProxy) -> CGFloat {
-        return geometry.size.height * 0.45
-    }
-    
-    private func calculateVerticalPaddingTop(geometry: GeometryProxy) -> CGFloat {
-        return geometry.size.height * 0.20
-    }
-    
-    private func calculateVerticalPaddingBottom(geometry: GeometryProxy) -> CGFloat {
-        return geometry.size.height * 0.10
-    }
+        private func calculateGraphHeight(geometry: GeometryProxy) -> CGFloat {
+            return geometry.size.height * 0.45
+        }
+        
+        private func calculateVerticalPaddingTop(geometry: GeometryProxy) -> CGFloat {
+            return geometry.size.height * 0.05
+        }
+        
+        private func calculateVerticalPaddingBottom(geometry: GeometryProxy) -> CGFloat {
+            return geometry.size.height * 0.10
+        }
     
     private func doResearch() {
         let apiKey = "WJ2S8Y8BM204TYD6"
@@ -196,22 +196,48 @@ struct YieldCalculation: Identifiable {
 struct YieldView: View {
     let calculation: YieldCalculation
     let investmentAmount: Double
+    
+    private var numberFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }
 
     var body: some View {
-        if let yield = calculation.yield {
-            if calculation.years == 0 {
-                return Text("Calculated Yield on YTD: $\(calculateYield(investmentAmount: investmentAmount, yield: yield), specifier: "%.2f")")
-                    .foregroundColor(.black)
-                    .padding()
+        Group {
+            if let yield = calculation.yield {
+                let calculatedYield = calculateYield(investmentAmount: investmentAmount, yield: yield)
+                let formattedYield = numberFormatter.string(from: NSNumber(value: calculatedYield)) ?? "\(calculatedYield)"
+                
+                HStack(spacing: 0) {
+                    Text(calculation.years == 0 ? "Calculated Yield on YTD: " : "Calculated Yield on \(calculation.years) Years: ")
+                        .foregroundColor(.black)
+                        .font(.system(size: 18))
+                        .padding(.vertical, 8)
+                        .fixedSize(horizontal: true, vertical: false) // Prevent wrapping
+                    
+                    Text("$\(formattedYield)")
+                        .foregroundColor(calculatedYield >= investmentAmount ? .green : .red)
+                        .bold()
+                        .font(.system(size: 18))
+                        .padding(.vertical, 8)
+                        .lineLimit(1) // Limit to one line
+                        .fixedSize(horizontal: true, vertical: false) // Prevent wrapping
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .transition(.opacity) // Optional: Add a transition effect
             } else {
-                return Text("Calculated Yield on \(calculation.years) Years: $\(calculateYield(investmentAmount: investmentAmount, yield: yield), specifier: "%.2f")")
-                    .foregroundColor(.black)
-                    .padding()
+                Text("Failed to calculate yield for \(calculation.years == 0 ? "YTD" : "\(calculation.years) Years")")
+                    .foregroundColor(.red)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 18))
+                    .padding(.vertical, 8)
+                    .lineLimit(1) // Limit to one line
+                    .fixedSize(horizontal: true, vertical: false) // Prevent wrapping
+                    .transition(.opacity) // Optional: Add a transition effect
             }
-        } else {
-            return Text("Failed to calculate yield for \(calculation.years == 0 ? "YTD" : "\(calculation.years) Years")")
-                .foregroundColor(.red)
-                .padding()
         }
     }
     
@@ -220,10 +246,25 @@ struct YieldView: View {
     }
 }
 
-struct StockDataPoint {
+struct YieldView_Previews: PreviewProvider {
+    static var previews: some View {
+        YieldView(calculation: YieldCalculation(years: 5, yield: 0.075), investmentAmount: 10000.0)
+    }
+}
+
+
+
+struct StockDataPoint: Equatable {
     var date: Date
     var adjustedClose: Double
+    
+    // Implement the == function to compare StockDataPoint instances for equality
+    static func == (lhs: StockDataPoint, rhs: StockDataPoint) -> Bool {
+        // Compare the date and adjustedClose properties for equality
+        return lhs.date == rhs.date && lhs.adjustedClose == rhs.adjustedClose
+    }
 }
+
 
 extension DateFormatter {
     static let iso8601: DateFormatter = {
@@ -233,3 +274,4 @@ extension DateFormatter {
         return formatter
     }()
 }
+
