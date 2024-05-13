@@ -1,8 +1,8 @@
 # Finished features since HW3:
 Let's start by going over the new work that was completed since HW3. 
-1). Added in scalable feature for slider that changes cost basis and updates yields
-2). Added in scalable graph for time ranges to view the stock over different time periods
-3). Added in cost basis icon that takes text field input to go with new ticker symbols added in a Portfolio
+* Added in scalable feature for slider that changes cost basis and updates yields
+* Added in scalable graph for time ranges to view the stock over different time periods
+* Added in cost basis icon that takes text field input to go with new ticker symbols added in a Portfolio
 
 # Remaining Work to be completed for Beta
 ## Feature 1: Security Search feature
