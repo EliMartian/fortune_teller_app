@@ -17,6 +17,7 @@ struct SecurityGraphView: View {
 
     @State private var isHovering = false
     @State private var hoveredDataPoint: StockDataPoint?
+    @State private var clickedDataPoint: StockDataPoint?
 
     var body: some View {
         GeometryReader { geometry in
@@ -24,7 +25,7 @@ struct SecurityGraphView: View {
                 Text(ticker.uppercased()) // Display ticker symbol as title in all caps
 
                 if !stockData.isEmpty {
-                    GraphContent(stockData: filteredStockData(), geometry: geometry, isHovering: $isHovering, hoveredDataPoint: $hoveredDataPoint)
+                    GraphContent(stockData: filteredStockData(), geometry: geometry, isHovering: $isHovering, hoveredDataPoint: $hoveredDataPoint, clickedDataPoint: $clickedDataPoint)
                         .padding(.bottom, 50) // Add bottom padding to make space for the overlay
                 } else {
                     Text("No security data available")
@@ -44,7 +45,9 @@ struct SecurityGraphView: View {
                     Text("1W").tag(8)
                 }
                 .pickerStyle(SegmentedPickerStyle())
+                .background(Color("DarkGrey")) // Set default background color for unselected segments
                 .padding(.horizontal)
+                .cornerRadius(30)
                 .padding(.bottom, 50)
             }
             .overlay(
@@ -52,7 +55,7 @@ struct SecurityGraphView: View {
                     .opacity(isHovering ? 1.0 : 0.0) // Show/hide the overlay based on hover state
                     .animation(.easeInOut(duration: 0.2)) // Apply animation to the opacity change
                     .frame(width: geometry.size.width, height: 50, alignment: .top) // Set frame size and alignment
-                    .offset(y: -0.35 * geometry.size.width) // Adjust vertical offset as needed
+                    .offset(y: -0.40 * geometry.size.width) // Adjust vertical offset as needed
             )
         }
     }
@@ -151,6 +154,7 @@ struct GraphContent: View {
     var geometry: GeometryProxy
     @Binding var isHovering: Bool
     @Binding var hoveredDataPoint: StockDataPoint?
+    @Binding var clickedDataPoint: StockDataPoint?
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -189,15 +193,29 @@ struct GraphContent: View {
                     .frame(width: 8, height: 8)
                     .position(x: x, y: y)
                     .gesture(
-                        TapGesture()
+                        TapGesture(count: 1) // Single tap gesture
                             .onEnded { _ in
-                                hoveredDataPoint = dataPoint
-                                isHovering = true
+                                if let currentHoveredDataPoint = hoveredDataPoint {
+                                    if dataPoint == currentHoveredDataPoint {
+                                        // Clicked on the same data point, toggle off hovering
+                                        hoveredDataPoint = nil
+                                        isHovering = false
+                                    } else {
+                                        // Clicked on a different data point, update hovered data
+                                        hoveredDataPoint = dataPoint
+                                        isHovering = true
+                                    }
+                                } else {
+                                    // No data point is currently hovered, show the clicked data point
+                                    hoveredDataPoint = dataPoint
+                                    isHovering = true
+                                }
                             }
                     )
             }
         }
     }
+
 
     private func normalizedY(for value: Double, in geometry: GeometryProxy) -> CGFloat {
         guard let maxValue = stockData.map({ $0.adjustedClose }).max() else {
@@ -208,3 +226,4 @@ struct GraphContent: View {
         return geometry.size.height - scaledValue - padding
     }
 }
+
