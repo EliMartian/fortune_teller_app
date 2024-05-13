@@ -1,3 +1,25 @@
+# Finished features since HW3:
+Let's start by going over the new work that was completed since HW3. 
+1). Added in scalable feature for slider that changes cost basis and updates yields
+2). Added in scalable graph for time ranges to view the stock over different time periods
+3). Added in cost basis icon that takes text field input to go with new ticker symbols added in a Portfolio
+
+# Remaining Work to be completed for Beta
+## Feature 1: Security Search feature
+* Build in delay after user searches for a stock that shows them a quote
+* Adjust UI and graphics for better user experience
+
+## Feature 2: User Portfolio create feature
+* Save cost basis information (right now only displays Cost basis info)
+* Editable portfolios (updating)
+* Showing a toast on the portfolio page
+
+## Feature 3: User Portfolio upload / receive feature
+* String parsing of the JSON format for portfolio sent strings
+
+## Feature 4: User Shop feature and associated number of requests
+* Displaying options for Shop and getting the shop to appear for the user
+
 # Various States that an app can enter on IOS
 The various states that an app can enter on IOS include: not running, suspended, inactive, active, and background.
 For not running, this could be like when the user recently exited out of the app and now the app is no longer running
