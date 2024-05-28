@@ -11,6 +11,7 @@ struct Portfolio: Identifiable, Codable {
     var id = UUID()
     var name: String
     var tickerSymbols: [String]
+    var costBasis: [String]
 
     // Static method to load portfolios from file
     static func loadPortfoliosFromFile() -> [Portfolio] {
