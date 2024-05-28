@@ -6,19 +6,23 @@ Let's start by going over the new work that was completed since HW3.
 
 # Remaining Work to be completed for Beta
 ## Feature 1: Security Search feature
-* Build in delay after user searches for a stock that shows them a quote
+* Build in delay after user searches for a stock to demonstrate gamification and marketing
 * Adjust UI and graphics for better user experience
 
 ## Feature 2: User Portfolio create feature
 * Save cost basis information (right now only displays Cost basis info)
 * Editable portfolios (updating)
-* Showing a toast on the portfolio page
 
 ## Feature 3: User Portfolio upload / receive feature
-* String parsing of the JSON format for portfolio sent strings
+* Actually parse the string the user sends in instead of current behavior which is just cloning whatever the last portfolio was. 
 
 ## Feature 4: User Shop feature and associated number of requests
 * Displaying options for Shop and getting the shop to appear for the user
+* Updating shop options to reflect pricing ideas for monetization
+
+## Feature 5: Security
+* Toggleable setting so that users have to put in their device passcode when logging in to the app from home screen
+* Store API key securely
 
 # Various States that an app can enter on IOS
 The various states that an app can enter on IOS include: not running, suspended, inactive, active, and background.
