@@ -11,11 +11,12 @@ import SwiftUI
 struct CreatePortfolioView: View {
     @Binding var isPresented: Bool
     var onSave: (Portfolio) -> Void
+    var existingPortfolio: Portfolio? = nil
 
     @State private var portfolioName: String = ""
     @State private var tickerSymbols: [String] = [""]
-    @State private var showCostBasis = false // State variable to control visibility of Cost Basis textbox
-
+    @State private var costBasis: [String] = [""]
+    @State private var showCostBasis = false
 
     var body: some View {
         NavigationView {
@@ -26,34 +27,55 @@ struct CreatePortfolioView: View {
                     ForEach(tickerSymbols.indices, id: \.self) { index in
                         VStack(alignment: .leading) {
                             HStack {
-                                TextField("Ticker Symbol \(index + 1)", text: $tickerSymbols[index])
-                                    .padding() // Add padding to the text field for spacing
-                                
+                                TextField("Ticker Symbol \(index + 1)", text: Binding(
+                                    get: { tickerSymbols[safe: index] ?? "" },
+                                    set: { tickerSymbols[safe: index] = $0 }
+                                ))
+                                .padding()
+
                                 Image(systemName: "dollarsign.circle.fill")
                                     .foregroundColor(.green)
-                                    .padding(.trailing, 8) // Adjust trailing padding to separate the icon from the text field
+                                    .padding(.trailing, 8)
                                     .onTapGesture {
-                                        // Toggle the state to show/hide the cost basis textbox
                                         showCostBasis.toggle()
                                     }
+
+                                Button(action: {
+                                    if tickerSymbols.indices.contains(index) && costBasis.indices.contains(index) {
+                                        tickerSymbols.remove(at: index)
+                                        costBasis.remove(at: index)
+                                    }
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                }
                             }
-                            .padding(.horizontal) // Add horizontal padding to the HStack
-                            
+                            .padding(.horizontal)
+
                             if showCostBasis {
-                                TextField("Cost Basis", text: .constant(""))
-                                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                                    .padding(.leading, 40) // Add leading padding to indent the cost basis textbox
+                                TextField("Cost Basis", text: Binding(
+                                    get: { costBasis.indices.contains(index) ? costBasis[index] : "" },
+                                    set: {
+                                        if costBasis.indices.contains(index) {
+                                            costBasis[index] = $0
+                                        }
+                                    })
+                                )
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding(.leading, 40)
                             }
                         }
                     }
+
                     Button(action: {
                         tickerSymbols.append("")
+                        costBasis.append("")
                     }) {
                         Label("Add Ticker Symbol", systemImage: "plus")
                     }
                 }
             }
-            .navigationTitle("Create Portfolio")
+            .navigationTitle(existingPortfolio == nil ? "Create Portfolio" : "Edit Portfolio")
             .navigationBarItems(
                 leading: Button("Cancel") {
                     isPresented = false
@@ -62,31 +84,54 @@ struct CreatePortfolioView: View {
                     savePortfolio()
                 }
             )
+            .onAppear {
+                if let portfolio = existingPortfolio {
+                    portfolioName = portfolio.name
+                    tickerSymbols = portfolio.tickerSymbols
+                    costBasis = portfolio.costBasis
+                }
+            }
         }
     }
 
     private func savePortfolio() {
-        // Ensure portfolioName is not empty before saving
         guard !portfolioName.isEmpty else {
-            // Optionally show an alert or message for empty portfolio name
             print("Error: Portfolio name is empty")
             return
         }
 
-        // Create a new Portfolio instance
-        let newPortfolio = Portfolio(name: portfolioName, tickerSymbols: tickerSymbols)
+        synchronizeArraySizes()
 
-        // Invoke the onSave closure to handle the newly created portfolio
+        let newPortfolio = Portfolio(id: existingPortfolio?.id ?? UUID(), name: portfolioName, tickerSymbols: tickerSymbols, costBasis: costBasis)
         onSave(newPortfolio)
-
-        // Dismiss the view
         isPresented = false
+    }
+
+    private func synchronizeArraySizes() {
+        while tickerSymbols.count > costBasis.count {
+            costBasis.append("")
+        }
+        while costBasis.count > tickerSymbols.count {
+            tickerSymbols.append("")
+        }
     }
 }
 
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
 
-//struct CreatePortfolioView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CreatePortfolioView(isPresented: .constant(true), onSave: { _ in })
-//    }
-//}
+extension Array {
+    subscript(safe index: Index) -> Element? {
+        get {
+            return indices.contains(index) ? self[index] : nil
+        }
+        set {
+            if let newValue = newValue, indices.contains(index) {
+                self[index] = newValue
+            }
+        }
+    }
+}

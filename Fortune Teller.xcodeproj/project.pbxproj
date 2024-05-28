@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F521BEA2BCB9F2900B4D9B2 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521BE42BCB9F2900B4D9B2 /* NotificationsView.swift */; };
-		6F521BEB2BCB9F2900B4D9B2 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521BE52BCB9F2900B4D9B2 /* PortfolioView.swift */; };
 		6F521BEC2BCB9F2900B4D9B2 /* SecurityGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521BE62BCB9F2900B4D9B2 /* SecurityGraphView.swift */; };
 		6F521BED2BCB9F2900B4D9B2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521BE72BCB9F2900B4D9B2 /* HomeView.swift */; };
 		6F521BEE2BCB9F2900B4D9B2 /* ResearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521BE82BCB9F2900B4D9B2 /* ResearchView.swift */; };
@@ -22,12 +21,22 @@
 		6F521C072BD18A8700B4D9B2 /* SelectedAuthorsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521C062BD18A8700B4D9B2 /* SelectedAuthorsManager.swift */; };
 		6F521C0A2BD1BB3800B4D9B2 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521C092BD1BB3800B4D9B2 /* QuoteView.swift */; };
 		6F521C0C2BD46CF600B4D9B2 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F521C0B2BD46CF600B4D9B2 /* ProfilePictureView.swift */; };
+		6F79DA742BDB53A8007D97C5 /* SecurityRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F79DA732BDB53A8007D97C5 /* SecurityRatingView.swift */; };
 		6F7F45862BCB979200AD82BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F45852BCB979200AD82BF /* Assets.xcassets */; };
 		6F7F45892BCB979200AD82BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7F45882BCB979200AD82BF /* Preview Assets.xcassets */; };
 		6F7F45932BCB979200AD82BF /* Fortune_TellerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45922BCB979200AD82BF /* Fortune_TellerTests.swift */; };
 		6F7F459D2BCB979200AD82BF /* Fortune_TellerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F459C2BCB979200AD82BF /* Fortune_TellerUITests.swift */; };
 		6F7F459F2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F459E2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift */; };
 		6F7F45AC2BCB97E000AD82BF /* Fortune_TellerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */; };
+		6FA0D3BF2BED5DFE00956B18 /* DataParsingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3BE2BED5DFE00956B18 /* DataParsingService.swift */; };
+		6FA0D3C12BED607700956B18 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3C02BED607700956B18 /* CoreDataStack.swift */; };
+		6FA0D3C32BED60CB00956B18 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3C22BED60CA00956B18 /* ShopView.swift */; };
+		6FA0D3C52BED60EB00956B18 /* ShopKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3C42BED60EB00956B18 /* ShopKitManager.swift */; };
+		6FA0D3C72BED611000956B18 /* PortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3C62BED611000956B18 /* PortfolioView.swift */; };
+		6FA0D3C92BED615100956B18 /* CreatePortfolioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3C82BED615100956B18 /* CreatePortfolioView.swift */; };
+		6FA0D3CB2BED617600956B18 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3CA2BED617600956B18 /* Portfolio.swift */; };
+		6FA0D3CD2BED618D00956B18 /* PortfolioDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3CC2BED618D00956B18 /* PortfolioDetailedView.swift */; };
+		6FA0D3CF2BED61BA00956B18 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA0D3CE2BED61BA00956B18 /* ActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +58,6 @@
 
 /* Begin PBXFileReference section */
 		6F521BE42BCB9F2900B4D9B2 /* NotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
-		6F521BE52BCB9F2900B4D9B2 /* PortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
 		6F521BE62BCB9F2900B4D9B2 /* SecurityGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityGraphView.swift; sourceTree = "<group>"; };
 		6F521BE72BCB9F2900B4D9B2 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6F521BE82BCB9F2900B4D9B2 /* ResearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchView.swift; sourceTree = "<group>"; };
@@ -61,6 +69,7 @@
 		6F521C062BD18A8700B4D9B2 /* SelectedAuthorsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAuthorsManager.swift; sourceTree = "<group>"; };
 		6F521C092BD1BB3800B4D9B2 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
 		6F521C0B2BD46CF600B4D9B2 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
+		6F79DA732BDB53A8007D97C5 /* SecurityRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityRatingView.swift; sourceTree = "<group>"; };
 		6F7F457E2BCB979000AD82BF /* Fortune Teller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fortune Teller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7F45852BCB979200AD82BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F7F45882BCB979200AD82BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -70,6 +79,15 @@
 		6F7F459C2BCB979200AD82BF /* Fortune_TellerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fortune_TellerUITests.swift; sourceTree = "<group>"; };
 		6F7F459E2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fortune_TellerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fortune_TellerApp.swift; path = ../../fortune_teller_ios/Fortune_TellerApp.swift; sourceTree = "<group>"; };
+		6FA0D3BE2BED5DFE00956B18 /* DataParsingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataParsingService.swift; sourceTree = "<group>"; };
+		6FA0D3C02BED607700956B18 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		6FA0D3C22BED60CA00956B18 /* ShopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		6FA0D3C42BED60EB00956B18 /* ShopKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopKitManager.swift; sourceTree = "<group>"; };
+		6FA0D3C62BED611000956B18 /* PortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortfolioView.swift; sourceTree = "<group>"; };
+		6FA0D3C82BED615100956B18 /* CreatePortfolioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePortfolioView.swift; sourceTree = "<group>"; };
+		6FA0D3CA2BED617600956B18 /* Portfolio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
+		6FA0D3CC2BED618D00956B18 /* PortfolioDetailedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PortfolioDetailedView.swift; sourceTree = "<group>"; };
+		6FA0D3CE2BED61BA00956B18 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +121,20 @@
 				6F521BE92BCB9F2900B4D9B2 /* ProfileView.swift */,
 				6F521C092BD1BB3800B4D9B2 /* QuoteView.swift */,
 				6F521C0B2BD46CF600B4D9B2 /* ProfilePictureView.swift */,
+				6FA0D3C42BED60EB00956B18 /* ShopKitManager.swift */,
+				6FA0D3C22BED60CA00956B18 /* ShopView.swift */,
 			);
 			path = ProfileView;
+			sourceTree = "<group>";
+		};
+		6F79DA722BDB5378007D97C5 /* ResearchView */ = {
+			isa = PBXGroup;
+			children = (
+				6F521BE82BCB9F2900B4D9B2 /* ResearchView.swift */,
+				6F521BE62BCB9F2900B4D9B2 /* SecurityGraphView.swift */,
+				6F79DA732BDB53A8007D97C5 /* SecurityRatingView.swift */,
+			);
+			path = ResearchView;
 			sourceTree = "<group>";
 		};
 		6F7F45752BCB979000AD82BF = {
@@ -131,14 +161,15 @@
 			isa = PBXGroup;
 			children = (
 				6F521BFA2BD0BCA400B4D9B2 /* DataLoader.swift */,
+				6FA0D3C02BED607700956B18 /* CoreDataStack.swift */,
+				6FA0D3BE2BED5DFE00956B18 /* DataParsingService.swift */,
 				6F521C062BD18A8700B4D9B2 /* SelectedAuthorsManager.swift */,
 				6F521C042BD1865400B4D9B2 /* PersistenceController.swift */,
 				6F521BE72BCB9F2900B4D9B2 /* HomeView.swift */,
-				6F521BE52BCB9F2900B4D9B2 /* PortfolioView.swift */,
+				6FC59B132BDDA75C00AC7E99 /* PortfolioView */,
 				6F521BE42BCB9F2900B4D9B2 /* NotificationsView.swift */,
 				6F521C082BD1BB1100B4D9B2 /* ProfileView */,
-				6F521BE82BCB9F2900B4D9B2 /* ResearchView.swift */,
-				6F521BE62BCB9F2900B4D9B2 /* SecurityGraphView.swift */,
+				6F79DA722BDB5378007D97C5 /* ResearchView */,
 				6F7F45AB2BCB97DF00AD82BF /* Fortune_TellerApp.swift */,
 				6F521BF72BD0B32E00B4D9B2 /* UserSettings.xcdatamodeld */,
 				6F521BFE2BD0BD9900B4D9B2 /* investor_quotes.plist */,
@@ -171,6 +202,18 @@
 				6F7F459E2BCB979200AD82BF /* Fortune_TellerUITestsLaunchTests.swift */,
 			);
 			path = "Fortune TellerUITests";
+			sourceTree = "<group>";
+		};
+		6FC59B132BDDA75C00AC7E99 /* PortfolioView */ = {
+			isa = PBXGroup;
+			children = (
+				6FA0D3C62BED611000956B18 /* PortfolioView.swift */,
+				6FA0D3C82BED615100956B18 /* CreatePortfolioView.swift */,
+				6FA0D3CA2BED617600956B18 /* Portfolio.swift */,
+				6FA0D3CC2BED618D00956B18 /* PortfolioDetailedView.swift */,
+				6FA0D3CE2BED61BA00956B18 /* ActivityViewController.swift */,
+			);
+			path = PortfolioView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,16 +352,25 @@
 				6F521BFB2BD0BCA400B4D9B2 /* DataLoader.swift in Sources */,
 				6F7F45AC2BCB97E000AD82BF /* Fortune_TellerApp.swift in Sources */,
 				6F521C0C2BD46CF600B4D9B2 /* ProfilePictureView.swift in Sources */,
-				6F521BEB2BCB9F2900B4D9B2 /* PortfolioView.swift in Sources */,
+				6FA0D3C52BED60EB00956B18 /* ShopKitManager.swift in Sources */,
+				6FA0D3CB2BED617600956B18 /* Portfolio.swift in Sources */,
 				6F521BEA2BCB9F2900B4D9B2 /* NotificationsView.swift in Sources */,
+				6FA0D3C92BED615100956B18 /* CreatePortfolioView.swift in Sources */,
 				6F521BED2BCB9F2900B4D9B2 /* HomeView.swift in Sources */,
 				6F521BEC2BCB9F2900B4D9B2 /* SecurityGraphView.swift in Sources */,
+				6F79DA742BDB53A8007D97C5 /* SecurityRatingView.swift in Sources */,
 				6F521BF92BD0B32E00B4D9B2 /* UserSettings.xcdatamodeld in Sources */,
 				6F521C0A2BD1BB3800B4D9B2 /* QuoteView.swift in Sources */,
 				6F521BEF2BCB9F2900B4D9B2 /* ProfileView.swift in Sources */,
+				6FA0D3C12BED607700956B18 /* CoreDataStack.swift in Sources */,
+				6FA0D3BF2BED5DFE00956B18 /* DataParsingService.swift in Sources */,
 				6F521BEE2BCB9F2900B4D9B2 /* ResearchView.swift in Sources */,
 				6F521C052BD1865400B4D9B2 /* PersistenceController.swift in Sources */,
+				6FA0D3C72BED611000956B18 /* PortfolioView.swift in Sources */,
+				6FA0D3C32BED60CB00956B18 /* ShopView.swift in Sources */,
 				6F521C072BD18A8700B4D9B2 /* SelectedAuthorsManager.swift in Sources */,
+				6FA0D3CD2BED618D00956B18 /* PortfolioDetailedView.swift in Sources */,
+				6FA0D3CF2BED61BA00956B18 /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

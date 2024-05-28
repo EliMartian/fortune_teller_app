@@ -21,7 +21,7 @@ class DataParsingService: ObservableObject {
         do {
             let decoder = JSONDecoder()
             let sharedData = try decoder.decode(SharedPortfolioData.self, from: data)
-            let parsedPortfolio = Portfolio(name: sharedData.name, tickerSymbols: sharedData.tickerSymbols)
+            let parsedPortfolio = Portfolio(name: sharedData.name, tickerSymbols: sharedData.tickerSymbols, costBasis: sharedData.costBasis)
             self.parsedPortfolio = parsedPortfolio
         } catch {
             self.parsingError = error
@@ -33,4 +33,5 @@ class DataParsingService: ObservableObject {
 struct SharedPortfolioData: Codable {
     let name: String
     let tickerSymbols: [String]
+    let costBasis: [String]
 }

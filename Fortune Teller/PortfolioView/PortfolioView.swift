@@ -5,8 +5,6 @@
 //  Created by E Martin on 4/6/24.
 //
 
-
-import Foundation
 import SwiftUI
 
 struct PortfolioView: View {
@@ -15,6 +13,7 @@ struct PortfolioView: View {
     @State private var isCreatingNewPortfolio = false
     @State private var isUploadingPortfolio = false
     @State private var uploadedPortfolioString = ""
+    @State private var parsingError: String?
 
     var body: some View {
         NavigationView {
@@ -23,10 +22,19 @@ struct PortfolioView: View {
                     .font(.title)
                     .foregroundColor(.green)
 
-                List {
-                    ForEach(portfolios) { portfolio in
+                if portfolios.isEmpty {
+                    Text("No portfolios available")
+                        .foregroundColor(.white)
+                } else {
+                    List(portfolios, id: \.id) { portfolio in
                         NavigationLink(destination: PortfolioDetailedView(
-                            portfolio: portfolio,
+                            portfolio: Binding(
+                                get: { portfolio },
+                                set: { updatePortfolio($0) }
+                            ),
+                            onUpdate: { updatedPortfolio in
+                                updatePortfolio(updatedPortfolio)
+                            },
                             onDelete: {
                                 deletePortfolio(portfolio)
                             }
@@ -34,8 +42,8 @@ struct PortfolioView: View {
                             Text(portfolio.name)
                         }
                     }
+                    .listStyle(InsetGroupedListStyle()) // Apply list style
                 }
-                .listStyle(InsetGroupedListStyle()) // Apply list style
 
                 HStack {
                     Button("Create a new Portfolio") {
@@ -61,19 +69,24 @@ struct PortfolioView: View {
                         
                         Button("Parse and Save") {
                             parseAndSavePortfolio()
-                            isUploadingPortfolio = false
                         }
                         .padding()
                         .disabled(uploadedPortfolioString.isEmpty)
+
+                        if let error = parsingError {
+                            Text(error)
+                                .foregroundColor(.red)
+                        }
                     }
+                    .padding()
                 }
                 .padding(.bottom) // Add padding to the buttons
                 Spacer()
             }
             .background(Color.black.edgesIgnoringSafeArea(.all)) // Apply black color
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // Use stack navigation style
         .onAppear {
+            print("PortfolioView appeared. Loading portfolios...")
             loadPortfolios()
         }
         .background(Color.black.edgesIgnoringSafeArea(.all)) // Apply black color
@@ -82,6 +95,13 @@ struct PortfolioView: View {
     private func savePortfolio(_ newPortfolio: Portfolio) {
         portfolios.append(newPortfolio)
         savePortfoliosToFile()
+    }
+    
+    private func updatePortfolio(_ updatedPortfolio: Portfolio) {
+        if let index = portfolios.firstIndex(where: { $0.id == updatedPortfolio.id }) {
+            portfolios[index] = updatedPortfolio
+            savePortfoliosToFile()
+        }
     }
 
     private func savePortfoliosToFile() {
@@ -98,6 +118,7 @@ struct PortfolioView: View {
     private func loadPortfolios() {
         let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("portfolios.json")
 
+        print("Loading portfolios from file...")
         guard let data = try? Data(contentsOf: fileURL!) else {
             print("Portfolios file not found or empty")
             return
@@ -105,6 +126,7 @@ struct PortfolioView: View {
 
         do {
             portfolios = try JSONDecoder().decode([Portfolio].self, from: data)
+            print("Portfolios loaded: \(portfolios)")
         } catch {
             print("Error decoding portfolios from file: \(error)")
         }
@@ -120,11 +142,21 @@ struct PortfolioView: View {
     private func parseAndSavePortfolio() {
         if let jsonData = uploadedPortfolioString.data(using: .utf8) {
             do {
-                let newPortfolio = try JSONDecoder().decode(Portfolio.self, from: jsonData)
-                savePortfolio(newPortfolio)
+                var newPortfolio = try JSONDecoder().decode(Portfolio.self, from: jsonData)
+                
+                // Generate a new unique ID for the new portfolio
+                newPortfolio.id = UUID()
+                
+                portfolios.append(newPortfolio)
+                savePortfoliosToFile()
+                loadPortfolios() // Reload portfolios to update the list
+
                 uploadedPortfolioString = ""
+                isUploadingPortfolio = false
+                parsingError = nil
             } catch {
-                print("Error parsing and saving portfolio: \(error)")
+                parsingError = "Error parsing and saving portfolio: \(error.localizedDescription)"
+                print(parsingError!)
             }
         }
     }
@@ -133,6 +165,7 @@ struct PortfolioView: View {
 struct PortfolioView_Previews: PreviewProvider {
     static var previews: some View {
         PortfolioView()
+            .environmentObject(DataParsingService())
     }
 }
 
