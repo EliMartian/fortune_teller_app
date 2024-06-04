@@ -16,6 +16,8 @@ struct ResearchView: View {
     @State private var errorMessage: String = ""
     @State private var investmentAmount: Double = 10000.0 // Initial investment amount
     @State private var showSlider: Bool = false
+    @State private var progress: Double = 0 // Control loading progress
+    @State private var isLoading: Bool = false // Control loading screen visibility
     @State private var cancellables = Set<AnyCancellable>()
 
     var body: some View {
@@ -32,8 +34,13 @@ struct ResearchView: View {
                                 
                                 Button("Search") {
                                     if !ticker.isEmpty {
-                                        doResearch()
-                                        showSlider = true // Show slider after search
+                                        isLoading = true // Show loading screen
+                                        startProgressTimer() // Start progress animation
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                            doResearch()
+                                            showSlider = true // Show slider after search
+                                            isLoading = false // Hide loading screen after 2 seconds
+                                        }
                                     }
                                 }
                                 Spacer()
@@ -60,6 +67,23 @@ struct ResearchView: View {
                                 .padding(.top, self.calculatePercentageHeight(geometry: geometry, percentage: 0.70)) // Adjust the top padding
                             }
                         }
+                        .overlay(
+                            Group {
+                                if isLoading {
+                                    ZStack {
+                                        Color.black.opacity(1.0)
+                                        GeometryReader { geometry in
+                                            Rectangle()
+                                                .fill(Color.green)
+                                                .frame(width: geometry.size.width * CGFloat(progress), height: geometry.size.height)
+                                                .animation(.linear(duration: 1.5))
+                                        }
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        .transition(.opacity)
+                                    }
+                                }
+                            }
+                        )
                         
                         // Display yield calculations
                         ForEach(yieldCalculations) { calculation in
@@ -77,6 +101,18 @@ struct ResearchView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height * 0.90)
             }
             .background(Color.black.edgesIgnoringSafeArea(.all))
+        }
+    
+        private func startProgressTimer() {
+            progress = 0
+            Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+                withAnimation {
+                    progress += 0.05 / 1.5 // Increment the progress by 0.05 every 0.05 seconds, assuming a 2-second duration
+                    if progress >= 2.0 {
+                        timer.invalidate()
+                    }
+                }
+            }
         }
         
         private func calculatePercentageHeight(geometry: GeometryProxy, percentage: CGFloat) -> CGFloat {
@@ -96,7 +132,10 @@ struct ResearchView: View {
         }
     
     private func doResearch() {
-        let apiKey = "WJ2S8Y8BM204TYD6"
+        guard let apiKey = KeychainHelper.shared.get(key: "AlphaVantageAPIKey") else {
+                    errorMessage = "API Key not found"
+                    return
+                }
         let ticker = ticker.uppercased()
         let urlString = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=\(ticker)&apikey=\(apiKey)"
         
