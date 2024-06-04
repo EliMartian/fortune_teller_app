@@ -1,10 +1,45 @@
+# Final Project Guidelines
+## Does it accomplish the stated objective? (10 points)
+I believe the stated objective of Fortune Teller was accomplished. All goals and deliverables set out have been completed since HW3, 
+and everything that I wanted to do has been done within the scope of this class. 
+
+## Does it deliver on the “value proposition”? (10 points)
+I would again argue yes for this. I wanted Fortune Teller to be fully customizable and allow the user 
+to share their top stock picks with others in an easy and convenient way, and I think by having my 
+customizable security search page (with scaler for investment amount, different time scales for the graphs, etc.)
+and with the Portfolio feature where it is easy and convenient to share a portfolio of stocks via the messaging 
+app on IOS, I would again argue that the value for this app has been delivered. 
+
+## Does it respect user privacy/is it secure? (10 points)
+I spoke with Professor Ong, and he said it was fine to just have the user security be respected by 
+storing the API key securely via Keychain services for IOS. So again, I believe this has also been fulfilled. 
+My app does not have states for different users, so it does not mandate as much user security since there is no
+log in and every single user has the same experience except except for the data stored locally to the file system on their device.
+
+## Does it have proper app lifecycle/state management? (10 points)
+I believe yes. I earned full points on HW3 I believe for state management, since my app loads resources (such as portfolios)
+on launch of the app, and also uses things like the generic iOS Form object to store user text in case they navigate away from the 
+app. 
+
+## Does it address at least three additional challenges (other than privacy and state management) unique to mobile app development? (15 points)
+I again spoke with Professor Ong for this, and I proposed the following unique mobile development challenges my app handles, and he approved these: 
+* API handling
+* Accommodating different sized mobile devices (Geometry Reader)
+* Building in easy UI features that are simple for something like a mobile app (ie using a Scaler to represent investment amount instead of a textbox)
+* Easy user experiences designed for mobile (like clickable data points, scaler, checkboxes
+* Modeling user experience off of other mobile apps (ie Stocks app)
+
+## Does it have a good user experience? (5 points)
+This is subjective, and I tried to make my UX very simple and easy to understand and also navigatable with things like back buttons, save buttons, etc. 
+This was all done in an attempt to reduce user frustration and maximize their navigation throughout the app. 
+
 # Finished features since HW3:
 Let's start by going over the new work that was completed since HW3. 
 * Added in scalable feature for slider that changes cost basis and updates yields
 * Added in scalable graph for time ranges to view the stock over different time periods
 * Added in cost basis icon that takes text field input to go with new ticker symbols added in a Portfolio
 
-# Remaining Work to be completed for Beta
+# Remaining Work to be completed for Final Project Submission
 ## Feature 1: Security Search feature
 * Build in delay after user searches for a stock to demonstrate gamification and marketing
 * Adjust UI and graphics for better user experience
@@ -18,10 +53,8 @@ Let's start by going over the new work that was completed since HW3.
 
 ## Feature 4: User Shop feature and associated number of requests
 * Displaying options for Shop and getting the shop to appear for the user
-* Updating shop options to reflect pricing ideas for monetization
 
 ## Feature 5: Security
-* Toggleable setting so that users have to put in their device passcode when logging in to the app from home screen
 * Store API key securely
 
 # Various States that an app can enter on IOS
